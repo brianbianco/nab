@@ -1,0 +1,32 @@
+#!/usr/bin/env ruby
+# encoding: UTF-8
+
+$:.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
+require 'nab'
+
+DEBUG = Logger::DEBUG
+WARN  = Logger::WARN
+FATAL = Logger::FATAL
+INFO  = Logger::INFO
+
+# Default option values
+options             = OpenStruct.new
+options.log_level   = INFO
+
+OptionParser.new do |o|
+  o.on('-l', '--log-level [LEVEL]', String, 'specify the log level (default is INFO)') do |l|
+    options.log_level = Kernel.const_get l.upcase
+  end
+
+  o.on('-h') { Nab::Log.info o; exit }
+
+  begin
+    o.parse!
+  rescue OptionParser::InvalidOption, OptionParser::MissingArgument
+    Nab::Log.fatal $!.to_s
+    Nab::Log.fatal o
+    exit 255
+  end
+end
+
+Nab::Client.new.run(options)
