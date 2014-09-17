@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
   spec.authors     = ['Brian Bianco']
   spec.email       = ['brian.bianco@gmail.com']
   spec.homepage    = 'http://www.github.com/brianbianco/nab'
-  spec.summary     = %q{}
+  spec.summary     = %q{A gem for downloading from different URI types}
   spec.description = %q{}
 
   spec.required_ruby_version     = '>= 1.9.2'
