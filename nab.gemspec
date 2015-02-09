@@ -21,7 +21,8 @@ Gem::Specification.new do |spec|
   spec.test_files = spec.files.grep(%r{^spec/})
 
   spec.executables  = %w(nab)
-  spec.require_paths = ["lib"]
+  spec.require_paths = ['lib']
 
-  spec.add_dependency "aws-sdk-v1"
+  spec.add_dependency 'aws-sdk-v1', '~> 1'
+  spec.add_dependency 'aws-sdk',    '~> 2'
 end
