@@ -1,5 +1,10 @@
 Nab Changelog
 ===
+0.0.4
+---
+  - Switches to aws-sdk-v1 as a dependencies as per recommendation from
+      http://ruby.awsblog.com/post/TxFKSK2QJE6RPZ/Upcoming-Stable-Release-of-AWS-SDK-for-Ruby-Version-2`
+
 0.0.3
 ---
   - Locks AWS gem into version 1.x
