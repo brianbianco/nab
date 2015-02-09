@@ -1,5 +1,10 @@
 Nab Changelog
 ===
+
+0.0.5
+---
+  - Fixes bug because of missing require for the new aws-sdk-v1 gem.
+
 0.0.4
 ---
   - Switches to aws-sdk-v1 as a dependencies as per recommendation from
