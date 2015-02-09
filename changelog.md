@@ -1,5 +1,8 @@
 Nab Changelog
 ===
+0.0.3
+---
+  - Locks AWS gem into version 1.x
 
 0.0.2
 ---

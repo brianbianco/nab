@@ -23,5 +23,5 @@ Gem::Specification.new do |spec|
   spec.executables  = %w(nab)
   spec.require_paths = ["lib"]
 
-  spec.add_dependency "aws-sdk", ">= 1.11.1"
+  spec.add_dependency "aws-sdk", "~> 1", ">= 1.11.1"
 end
