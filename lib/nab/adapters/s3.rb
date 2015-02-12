@@ -2,36 +2,27 @@
 
 module Nab
   class S3Adapter
-    attr_accessor :base_path
+    attr_accessor :write_adapter, :strip_dirs
 
-    def initialize(base_path = ".")
+    def initialize
       AWS.config
-      @base_path = "."
+      @write_adapter = FileWriter
+      @strip_dirs = false
     end
 
-    def get(uri)
+    def get(uri,destination)
       bucket_name = uri.host
       asset_name  = uri.path.gsub(/^\//, "") # remove leading slashes
-      name        = File.basename asset_name
-      remote_path = File.dirname asset_name
-      local_path  = File.join @base_path,remote_path
+      s3          = AWS::S3.new
+      bucket      = s3.buckets[bucket_name]
+      asset       = bucket.objects[asset_name]
 
-      Log.debug "Bucket: #{bucket_name}"
-      Log.debug "Asset name: #{asset_name}"
-      Log.debug "Local path: #{local_path}"
+      Nab::Log.info "Retrieving #{File.join(bucket_name,asset_name)}"
+      asset_name  = File.basename(asset_name) if strip_dirs
+      store       = write_adapter.new(destination, asset_name)
 
-      FileUtils.mkdir_p local_path
-
-      s3     = AWS::S3.new
-      bucket = s3.buckets[bucket_name]
-      asset  = bucket.objects[asset_name]
-
-      Log.info "Downloading #{File.join(bucket_name,asset_name)} to #{File.join(local_path,name)}"
-      File.open(File.join(local_path,name), 'wb') do |file|
-        asset.read do |chunk|
-          file.write chunk
-        end
-      end
+      asset.read { |chunk| store.write chunk }
+      store.close
     end
   end
 end
