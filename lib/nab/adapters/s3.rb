@@ -12,13 +12,11 @@ module Nab
 
     def get(uri,destination)
       bucket_name = uri.host
-      asset_name  = uri.path.gsub(/^\//, "") # remove leading slashes
       s3          = AWS::S3.new
       bucket      = s3.buckets[bucket_name]
-      asset       = bucket.objects[asset_name]
-
+      asset       = bucket.objects[Util.path_from_uri(uri)]
+      asset_name  = Util.path_from_uri(uri,strip_dirs)
       Nab::Log.info "Retrieving #{File.join(bucket_name,asset_name)}"
-      asset_name  = File.basename(asset_name) if strip_dirs
       store       = write_adapter.new(destination, asset_name)
 
       asset.read { |chunk| store.write chunk }

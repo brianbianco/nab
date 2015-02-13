@@ -1,6 +1,10 @@
 Nab Changelog
 ===
 
+1.1.0
+---
+  - Factors out path_from_uri into new Utils module
+
 1.0.0
 ---
   - Adds ability to change destination directory (where files go)
