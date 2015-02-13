@@ -1,6 +1,13 @@
 Nab Changelog
 ===
 
+1.0.0
+---
+  - Adds ability to change destination directory (where files go)
+  - Adds the ability to strip leading directories when saving files locally
+  - Major rewrite of how files are writter (file adapters)
+  - Adds storage adapters for STDERR and STDOUT
+
 0.0.5
 ---
   - Fixes bug because of missing require for the new aws-sdk-v1 gem.
