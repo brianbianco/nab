@@ -46,4 +46,4 @@ OptionParser.new do |o|
   end
 end
 
-Nab::Client.new.run(options)
+Nab::Client.new.run(ARGV,options)

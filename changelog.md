@@ -1,6 +1,10 @@
 Nab Changelog
 ===
 
+1.2.0
+---
+  - Changes client class to be easier to run when not called from command line
+
 1.1.0
 ---
   - Factors out path_from_uri into new Utils module

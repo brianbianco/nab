@@ -2,12 +2,13 @@
 
 module Nab
   class Client
-    def run(options)
+    def run(args,options)
       Log.level options.log_level
 
       Nab::Log.debug "Options received: #{options.inspect}"
+      Nab::Log.debug "Arguments received: #{args.inspect}"
 
-      if ARGV.size < 1
+      if args.size < 1
         Nab::Log.fatal "No arguments specified"
         exit 1
       end
@@ -16,7 +17,7 @@ module Nab
       manager.write_adapter = options.write_adapter
       manager.strip_dirs = options.strip_dirs
 
-      ARGV.each do |a|
+      args.each do |a|
         uri = URI(a)
         adapter = manager.get uri.scheme.capitalize
         adapter.get uri,options.destination_dir
